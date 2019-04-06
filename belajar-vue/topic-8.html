@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Belajar vue.js</title>
+  <link rel="stylesheet" href="bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>{{message}}</h1>
+
+    <p v-for="mahasiswa in namaMahasiswa">{{mahasiswa}}</p>
+
+  </div>
+  <script src="vue.js"></script>
+  <script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Daftar Nama Mahasiwa Lulus', // tipe data string
+      namaMahasiswa: ['Reza Daulay', 'Patrick Starr', 'Rudi Wowor', 'Ntis'] // tipe data array
+    },
+    methods: {
+      showAlert: function (message) {
+        alert(message)
+      },
+      showNama: function (nama) {
+        alert(this.nama)
+      }
+    }
+  });
+  </script>
+</body>
+</html>

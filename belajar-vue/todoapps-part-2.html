@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Belajar vue.js</title>
+  <link rel="stylesheet" href="bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h2 style="text-align: center; margin-bottom: 20px;">To Do Apps</h2>
+    <div class="row">
+      <div class="col-6">
+        <form v-on:submit.prevent="insertData">
+          <div class="form-group">
+            <label for="my-input">Subject *</label>
+            <textarea v-model="formSubject" class="form-control" rows="2" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </form>
+      </div>
+      <div class="col-6">
+        <h4>My To Do</h4>
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Subject</th>
+              <th width="15%">Completed?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="todo in dataTodo">
+              <td>{{todo}}</td>
+              <td>
+                <input type="checkbox">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      formSubject: '', // tipe data string
+      dataTodo: [] // tipe data array
+    },
+    methods: {
+      insertData: function () {
+        this.dataTodo.push(this.formSubject) // fungsi menambah isi array
+        // this.formSubject = '' // untuk mengembalikan isian  v-model formSubject kosong
+      }
+    },
+  });
+  </script>
+</body>
+</html>

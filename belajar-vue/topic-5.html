@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Belajar vue.js</title>
+</head>
+<body>
+  <div id="app">
+    <h1>{{message}}</h1>
+    <button v-on:click="showAlert('Hello its vue')">Klik Saya</button>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Belajar Vue.js'
+    },
+    methods: {
+      showAlert: function (message) {
+        alert(message)
+      }
+    },
+  });
+  </script>
+</body>
+</html>

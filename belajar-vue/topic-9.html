@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Belajar vue.js</title>
+  <link rel="stylesheet" href="bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>{{message}}</h1>
+
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>NIM</th>
+          <th>Nama</th>
+          <th>Semester</th>
+          <th>Jurusan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="mahasiswa in dataMahasiswa">
+          <td>{{mahasiswa.nim}}</td>
+          <td>{{mahasiswa.nama}}</td>
+          <td>{{mahasiswa.semester}}</td>
+          <td>{{mahasiswa.jurusan}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <script src="vue.js"></script>
+  <script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Belajar Looping Vue.js', // tipe data string
+      dataMahasiswa: [ // tipe data array object
+        {
+          nim: '1201820',
+          nama: 'Reza Daulay',
+          semester: 'VII',
+          jurusan: 'Teknik Informatika',
+        },
+        {
+          nim: '1201821',
+          nama: 'Si Doel',
+          semester: 'VI',
+          jurusan: 'Teknik Mesin',
+        }
+      ]
+    },
+    methods: {
+      showAlert: function (message) {
+        alert(message)
+      },
+      showNama: function (nama) {
+        alert(this.nama)
+      }
+    }
+  });
+  </script>
+</body>
+</html>

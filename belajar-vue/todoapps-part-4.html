@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Belajar vue.js</title>
+  <link rel="stylesheet" href="bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h2 style="text-align: center; margin-bottom: 20px;">To Do Apps</h2>
+    <div class="row">
+      <div class="col-6">
+        <form v-on:submit.prevent="insertData">
+          <div class="form-group">
+            <label for="my-input">Subject *</label>
+            <textarea v-model="formSubject" class="form-control" rows="2" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </form>
+      </div>
+      <div class="col-6">
+        <h4>My To Do</h4>
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Subject</th>
+              <th width="15%">Completed?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(todo, index) in dataTodo"> <!-- index: urutan array, dimulai dari 0, 1, 2, dst.. -->
+              <td>{{todo}}</td>
+              <td>
+                <button class="btn btn-warning" type="button" v-on:click="setCompleted(index)">Completed</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      formSubject: '', // tipe data string
+      dataTodo: [] // tipe data array
+    },
+    methods: {
+      insertData () {
+        this.dataTodo.push(this.formSubject) // fungsi menambah isi array
+        this.formSubject = '' // untuk mengembalikan isian  v-model formSubject ke posisi kosong
+        window.localStorage.setItem('dataTodo', this.dataTodo) // isi dataTodo terbaru dengan isi dari local storage
+      },
+      setCompleted: function (index) {
+        this.dataTodo.splice(index, 1); // menghapus isi array bedasarkan nomor index
+        window.localStorage.setItem('dataTodo', this.dataTodo) // isi dataTodo terbaru dengan isi dari local storage
+      }
+    },
+    mounted: function () { // seluruh perintah yang di tulisa di dalam fungsi mounted akan di jalankan saat halaman web di load
+      // console.log(window.localStorage.getItem('dataTodo'))
+      if (window.localStorage.getItem('dataTodo') !== null && window.localStorage.getItem('dataTodo') !== '') { // fungsi dijalankan jika  isi local storage tidak kosong
+        this.dataTodo = window.localStorage.getItem('dataTodo').split(',') // isi dataTodo dengan isi dari local storage
+        // local storage hanya dapat menyimpan string, oleh karena itu data array yang kita simpan berubah jadi array, jadi mesti di pecah kembali menjadi string dengan memisahkan setiap bujsect yang masuk menggunakan tanda koma
+      }
+    }
+  });
+  </script>
+</body>
+</html>
